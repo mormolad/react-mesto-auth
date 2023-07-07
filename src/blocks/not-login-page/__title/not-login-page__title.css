@@ -1,0 +1,15 @@
+.not-login-page__title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: normal;
+  margin: 60px auto 50px auto;
+  color: #ffffff;
+  text-align: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .not-login-page__title {
+    margin: 40px auto;
+    font-size: 20px;
+  }
+}

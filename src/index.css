@@ -42,3 +42,11 @@
 @import url(./blocks/popup/_image/popup_image.css);
 @import url(./blocks/popup/__content/_delete/popup__content_delete.css);
 @import url(./blocks/popup/__content/_add-new-avatar/popup__content_add-new-avatarr.css);
+@import url(./blocks/not-login-page/not-login-page.css);
+@import url(./blocks/not-login-page/__content/not-login-page__content.css);
+@import url(./blocks/not-login-page/__field/not-login-page__field.css);
+@import url(./blocks/not-login-page/__message-error/not-login-page__message-error.css);
+@import url(./blocks/not-login-page/__sub-text-button/not-login-page__sub-text-button.css);
+@import url(./blocks/not-login-page/__submit/not-login-page__submit.css);
+@import url(./blocks/not-login-page/__title/not-login-page__title.css);
+@import url(./blocks/not-login-page/__form-section/not-login-page__form-section.css);
