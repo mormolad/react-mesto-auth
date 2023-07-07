@@ -3,8 +3,7 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 880px;
-  align-items: start;
-  align-content: start;
+
   background-color: black;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
