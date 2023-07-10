@@ -8,32 +8,24 @@ class Api {
     return fetch(`${this.url}users/me`, {
       method: 'GET',
       headers: this.headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   //получить карточки
   getCard() {
     return fetch(`${this.url}cards`, {
       method: 'GET',
       headers: this.headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   //установить новые данные о пользователе
   setUserData(userData) {
@@ -41,16 +33,12 @@ class Api {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(userData),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   //установить новую карточку
   setNewCadr({ name, link }) {
@@ -58,32 +46,24 @@ class Api {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({ name: name, link: link }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   //удалить карточку
   deleteCard(idCard) {
     return fetch(`${this.url}cards/${idCard}`, {
       method: 'DELETE',
       headers: this.headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
   // обработать клик по лайку (поставить/убрать)
   changeLikeCardStatus(idCard, statusLike) {
@@ -91,16 +71,12 @@ class Api {
     return fetch(`${this.url}cards/${idCard}/likes`, {
       method: changeFetch,
       headers: this.headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
 
   //установить новый аватар
@@ -109,16 +85,61 @@ class Api {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({ avatar: urlAvatar }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+  //зарегистрировать пользователя
+  registerUser({ email, password }) {
+    return fetch(`https://auth.nomoreparties.co/signup`, {
+      method: 'POST',
+
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password, email }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+  //зарегистрировать пользователя
+  loginUser({ email, password }) {
+    return fetch(`https://auth.nomoreparties.co/signin`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ password, email }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+  //проверка токена
+  chekTokenUser(token) {
+    return fetch(`https://auth.nomoreparties.co/users/me`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Autorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
   }
 }
 const api = new Api({

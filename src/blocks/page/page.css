@@ -1,9 +1,10 @@
 .page {
-  height: 100vh;
+  height: 100%;
   display: grid;
   justify-content: center;
   grid-template-columns: 880px;
 
+  grid-template-rows: 119px auto 48px;
   background-color: black;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }

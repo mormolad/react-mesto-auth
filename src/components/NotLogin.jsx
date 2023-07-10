@@ -1,6 +1,25 @@
 import { Link } from 'react-router-dom';
+import React from 'react';
 
-function NotLogin({ title, buttonText, subButtonText, name }) {
+function NotLogin({ title, buttonText, subTextButtonElement, name, onSubmit }) {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  //обработка поля имени
+  function handleChangeName(e) {
+    setEmail(e.target.value);
+  }
+  // обработака поля рода деятельности
+  function handleChangeDescription(e) {
+    setPassword(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    onSubmit({ email, password });
+  }
+
   return (
     <div className="not-login-page">
       <h1 className="not-login-page__title">{title}</h1>
@@ -8,7 +27,7 @@ function NotLogin({ title, buttonText, subButtonText, name }) {
         className={`not-login-page__content not-login-page__content_${name}`}
         name={`form-not-login-page-${name}`}
         id={`content-not-login-page-${name}`}
-        //onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         noValidate
       >
         <div className="not-login-page__form-section">
@@ -20,8 +39,8 @@ function NotLogin({ title, buttonText, subButtonText, name }) {
             minLength="2"
             maxLength="40"
             placeholder="Email"
-            // onChange={handleChangeName}
-            value={''} // что бы компонент сразу был управляемым
+            onChange={handleChangeName}
+            value={email ?? ''} // что бы компонент сразу был управляемым
             required
           />
           <span className="not-login-page__message-error"></span>
@@ -35,8 +54,8 @@ function NotLogin({ title, buttonText, subButtonText, name }) {
             minLength="2"
             maxLength="200"
             placeholder="Пароль"
-            // onChange={handleChangeDescription}
-            value={''} // что бы компонент сразу был управляемым
+            onChange={handleChangeDescription}
+            value={password ?? ''} // что бы компонент сразу был управляемым
             required
           />
           <span className="popup__message-error"></span>
@@ -49,9 +68,7 @@ function NotLogin({ title, buttonText, subButtonText, name }) {
         >
           {buttonText}
         </button>
-        <Link to="/sign-in" className="not-login-page__sub-text-button">
-          {subButtonText}
-        </Link>
+        {subTextButtonElement}
       </form>
     </div>
   );

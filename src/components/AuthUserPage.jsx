@@ -121,7 +121,7 @@ function AuthUserPage() {
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Header />
+      <Header element={<p>Перевалов А.С.</p>} />
       <Main
         onEditProfile={() => {
           setIsEditProfilePopupOpen(true);

@@ -12,6 +12,6 @@
   .not-login-page__content {
     width: 282px;
     padding-bottom: 0px;
-    grid-template-rows: 115px 57px 50px 98px;
+    grid-template-rows: minmax(57px, auto) minmax(57px, auto) 215px 50px;
   }
 }
