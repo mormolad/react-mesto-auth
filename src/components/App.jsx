@@ -16,14 +16,16 @@ function App() {
     api
       .chekTokenUser(jwt)
       .then((res) => {
-        console.log(jwt, 'из апп ', res);
         if (res) {
           setLoggedIn(true);
-          console.log(loggedIn, '= loger');
         }
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        console.log(loggedIn, '= loger');
+        hist('/');
       });
   }
 

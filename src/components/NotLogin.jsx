@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
 
 function NotLogin({ title, buttonText, subTextButtonElement, name, onSubmit }) {
@@ -16,7 +15,6 @@ function NotLogin({ title, buttonText, subTextButtonElement, name, onSubmit }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     onSubmit({ email, password });
   }
 

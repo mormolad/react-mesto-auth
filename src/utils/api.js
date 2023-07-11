@@ -132,9 +132,10 @@ class Api {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Autorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
+      console.log(res);
       if (res.ok) {
         return res.json();
       }

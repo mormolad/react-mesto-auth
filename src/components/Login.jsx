@@ -13,7 +13,6 @@ function Login({ hist }) {
       .loginUser({ email, password })
       .then((data) => {
         localStorage.setItem('jwt', data.token);
-        console.log(localStorage.getItem('jwt'));
         hist('/');
       })
       .catch((err) => {
