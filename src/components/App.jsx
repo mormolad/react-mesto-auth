@@ -24,7 +24,7 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        console.log(loggedIn, '= loger');
+        //console.log(loggedIn, '= loger');
         hist('/');
       });
   }
@@ -34,6 +34,7 @@ function App() {
     if (jwt) {
       auth(jwt);
     }
+    console.log(loggedIn, '= loger');
   }, []);
 
   return (
