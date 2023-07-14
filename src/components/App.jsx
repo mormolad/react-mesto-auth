@@ -10,32 +10,29 @@ import api from '../utils/api';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const hist = useNavigate();
-
+  const [emailUser, setEmailUser] = React.useState('');
+  const navigate = useNavigate();
   function auth(jwt) {
     api
       .chekTokenUser(jwt)
       .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-        }
+        setEmailUser(res.data.email);
+        setLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        //console.log(loggedIn, '= loger');
-        hist('/');
       });
   }
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth(jwt);
+    if (localStorage.getItem('jwt')) {
+      auth(localStorage.jwt);
     }
-    console.log(loggedIn, '= loger');
   }, []);
+
+  useEffect(() => {
+    if (loggedIn) navigate('/', { replace: true });
+  }, [loggedIn]);
 
   return (
     <div className="page">
@@ -53,11 +50,21 @@ function App() {
         <Route
           path="/"
           element={
-            <ProtectedRoute element={AuthUserPage} loggedIn={loggedIn} />
+            <ProtectedRoute
+              element={AuthUserPage}
+              loggedIn={loggedIn}
+              emailUser={emailUser}
+              navigate={navigate}
+            />
           }
         />
-        <Route path="/sign-up" element={<Register hist={hist} />} />
-        <Route path="/sign-in" element={<Login hist={hist} />} />
+        <Route path="/sign-up" element={<Register navigate={navigate} />} />
+        <Route
+          path="/sign-in"
+          element={
+            <Login setLoggedIn={setLoggedIn} setEmailUser={setEmailUser} />
+          }
+        />
       </Routes>
     </div>
   );

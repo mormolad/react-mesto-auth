@@ -6,19 +6,20 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 
-function Login({ hist }) {
+function Login({ setLoggedIn, setEmailUser }) {
   function handleSubmit({ email, password }) {
-    // Передаём значения управляемых компонентов во внешний обработчик
     api
       .loginUser({ email, password })
       .then((data) => {
         localStorage.setItem('jwt', data.token);
-        hist('/');
+        setEmailUser(email);
+        setLoggedIn(true);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
   return (
     <>
       <Header

@@ -135,7 +135,6 @@ class Api {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
-      console.log(res);
       if (res.ok) {
         return res.json();
       }
