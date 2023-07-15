@@ -31,13 +31,7 @@ function Register() {
 
   return (
     <>
-      <Header
-        element={
-          <Link to="/sign-in" className="header__nav-link">
-            Войти
-          </Link>
-        }
-      />
+      <Header title={'Войти'} route={'sign-in'} />
       <NotLogin
         title={'Регистрация'}
         buttonText={'Зарегистрироваться'}

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 
-function Login({ setLoggedIn }) {
+function Login({ setLoggedIn, loggedIn }) {
   function handleSubmit({ email, password }) {
     api
       .loginUser({ email, password })
@@ -21,13 +21,7 @@ function Login({ setLoggedIn }) {
 
   return (
     <>
-      <Header
-        element={
-          <Link to="/sign-up" className="header__nav-link">
-            Зарегистрироваться
-          </Link>
-        }
-      />
+      <Header title={'Регистрация'} loggedIn={loggedIn} route={'sign-up'} />
       <NotLogin
         title={'Вход'}
         buttonText={'Войти'}

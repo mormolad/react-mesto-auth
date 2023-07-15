@@ -1,12 +1,15 @@
-import React from 'react';
+import HeaderLogin from './HeaderLogin';
+import HeaderLogout from './HeaderLogout';
 
-import logoHeader from '../images/logo-header.svg';
-function Header({ element }) {
+function Header({ loggedIn, setLoggedIn, emailUser, title, route }) {
   return (
-    <header className="header">
-      <img src={logoHeader} className="header__logo" alt="логотип сайта" />
-      {element}
-    </header>
+    <>
+      {loggedIn ? (
+        <HeaderLogin setLoggedIn={setLoggedIn} emailUser={emailUser} />
+      ) : (
+        <HeaderLogout setLoggedIn={setLoggedIn} title={title} route={route} />
+      )}
+    </>
   );
 }
 

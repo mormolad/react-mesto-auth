@@ -16,6 +16,7 @@ function App() {
     api
       .chekTokenUser(jwt)
       .then((res) => {
+        console.log('email - ', res.data.email);
         setEmailUser(res.data.email);
         setLoggedIn(true);
       })
@@ -59,8 +60,14 @@ function App() {
             />
           }
         />
-        <Route path="/sign-up" element={<Register navigate={navigate} />} />
-        <Route path="/sign-in" element={<Login setLoggedIn={setLoggedIn} />} />
+        <Route
+          path="/sign-up"
+          element={<Register navigate={navigate} loggedIn={loggedIn} />}
+        />
+        <Route
+          path="/sign-in"
+          element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} />}
+        />
       </Routes>
     </div>
   );

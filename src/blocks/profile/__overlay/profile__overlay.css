@@ -1,16 +1,9 @@
 .profile__overlay {
   position: absolute;
-  top: 159px;
   width: 120px;
   height: 120px;
   background-color: rgb(0, 0, 0, 0);
   z-index: 2;
-}
-
-@media screen and (max-width: 1023px) {
-  .profile__overlay {
-    top: 116px;
-  }
 }
 
 .profile__overlay:hover {

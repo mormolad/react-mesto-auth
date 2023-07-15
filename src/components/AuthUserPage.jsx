@@ -10,7 +10,7 @@ import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
-function AuthUserPage({ emailUser, setLoggedIn }) {
+function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -121,24 +121,12 @@ function AuthUserPage({ emailUser, setLoggedIn }) {
       });
   }
 
-  //обработка кнопки Выйти в шапке сайта
-  function handleButtonExit() {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    //props.navigate('/sign-in', { replace: true });
-  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Header
-        element={
-          <>
-            <p className="header__email">{emailUser}</p>
-            <p className="header__button-exit" onClick={handleButtonExit}>
-              {' '}
-              Выйти
-            </p>
-          </>
-        }
+        setLoggedIn={setLoggedIn}
+        emailUser={emailUser}
+        loggedIn={loggedIn}
       />
       <Main
         onEditProfile={() => {

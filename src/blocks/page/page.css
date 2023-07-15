@@ -4,7 +4,7 @@
   justify-content: center;
   grid-template-columns: 880px;
 
-  grid-template-rows: 119px auto 48px;
+  grid-template-rows: minmax(119px, auto) auto 48px;
   background-color: black;
   font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -12,5 +12,6 @@
 @media screen and (max-width: 1023px) {
   .page {
     grid-template-columns: 320px;
+    grid-template-rows: minmax(84px, auto) auto 48px;
   }
 }
