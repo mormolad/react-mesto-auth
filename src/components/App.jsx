@@ -53,18 +53,14 @@ function App() {
             <ProtectedRoute
               element={AuthUserPage}
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               emailUser={emailUser}
               navigate={navigate}
             />
           }
         />
         <Route path="/sign-up" element={<Register navigate={navigate} />} />
-        <Route
-          path="/sign-in"
-          element={
-            <Login setLoggedIn={setLoggedIn} setEmailUser={setEmailUser} />
-          }
-        />
+        <Route path="/sign-in" element={<Login setLoggedIn={setLoggedIn} />} />
       </Routes>
     </div>
   );

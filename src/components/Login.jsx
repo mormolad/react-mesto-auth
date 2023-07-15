@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 
 import React from 'react';
 
-function Login({ setLoggedIn, setEmailUser }) {
+function Login({ setLoggedIn }) {
   function handleSubmit({ email, password }) {
     api
       .loginUser({ email, password })
       .then((data) => {
         localStorage.setItem('jwt', data.token);
-        setEmailUser(email);
         setLoggedIn(true);
       })
       .catch((err) => {
