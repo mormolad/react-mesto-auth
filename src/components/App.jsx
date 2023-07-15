@@ -12,6 +12,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [emailUser, setEmailUser] = React.useState('');
   const navigate = useNavigate();
+
   function auth(jwt) {
     api
       .chekTokenUser(jwt)
@@ -19,6 +20,7 @@ function App() {
         console.log('email - ', res.data.email);
         setEmailUser(res.data.email);
         setLoggedIn(true);
+        console.log('loggedIn', loggedIn, 'emailUser', emailUser);
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +34,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (loggedIn) navigate('/', { replace: true });
+    if (loggedIn) {
+      console.log(localStorage.getItem('jwt'), '    ');
+      auth(localStorage.jwt);
+      navigate('/', { replace: true });
+    }
   }, [loggedIn]);
 
   return (

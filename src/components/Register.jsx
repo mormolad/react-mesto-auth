@@ -5,10 +5,12 @@ import InfoTooltip from './InfoTooltip';
 import api from '../utils/api';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function Register() {
   const [isStatusAuthPopupOpen, setIsStatusAuthPopupOpen] = useState(false);
   const [titlePopup, setTitlePopup] = useState('');
   const [registerStatus, setRegisterStatus] = useState(false);
+  const navigate = useNavigate();
   function handleSubmit({ email, password }) {
     // Передаём значения управляемых компонентов во внешний обработчик
     api
@@ -27,6 +29,7 @@ function Register() {
   }
   const closePopup = () => {
     setIsStatusAuthPopupOpen(false);
+    navigate('/', { replace: true });
   };
 
   return (
