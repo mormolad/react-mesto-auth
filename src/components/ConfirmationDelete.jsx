@@ -18,7 +18,7 @@ function ConfirmationDelete({ isOpen, onClose, onCardDelete, cardId }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-    ></PopupWithForm>
+    />
   );
 }
 

@@ -41,38 +41,36 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <div className="popup__form-section">
-          <input
-            type="text"
-            className="popup__field"
-            id="input-user-name"
-            name="inputUserName"
-            minLength="2"
-            maxLength="40"
-            placeholder="Имя автора"
-            onChange={handleChangeName}
-            value={name ?? ''} // что бы компонент сразу был управляемым
-            required
-          />
-          <span className="popup__message-error"></span>
-        </div>
-        <div className="popup__form-section">
-          <input
-            type="text"
-            className="popup__field"
-            id="input-user-employment"
-            name="inputUserEmployment"
-            minLength="2"
-            maxLength="200"
-            placeholder="Род деятельности"
-            onChange={handleChangeDescription}
-            value={description ?? ''} // что бы компонент сразу был управляемым
-            required
-          />
-          <span className="popup__message-error"></span>
-        </div>
-      </>
+      <div className="popup__form-section">
+        <input
+          type="text"
+          className="popup__field"
+          id="input-user-name"
+          name="inputUserName"
+          minLength="2"
+          maxLength="40"
+          placeholder="Имя автора"
+          onChange={handleChangeName}
+          value={name ?? ''} // что бы компонент сразу был управляемым
+          required
+        />
+        <span className="popup__message-error"></span>
+      </div>
+      <div className="popup__form-section">
+        <input
+          type="text"
+          className="popup__field"
+          id="input-user-employment"
+          name="inputUserEmployment"
+          minLength="2"
+          maxLength="200"
+          placeholder="Род деятельности"
+          onChange={handleChangeDescription}
+          value={description ?? ''} // что бы компонент сразу был управляемым
+          required
+        />
+        <span className="popup__message-error"></span>
+      </div>
     </PopupWithForm>
   );
 }

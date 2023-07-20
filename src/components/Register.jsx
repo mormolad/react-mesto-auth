@@ -1,8 +1,8 @@
 import Header from './Header';
 import Footer from './Footer';
-import NotLogin from './NotLogin';
+import AuthPage from './AuthPage';
 import InfoTooltip from './InfoTooltip';
-import api from '../utils/api';
+import auth from '../utils/auth';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,8 +13,8 @@ function Register() {
   const navigate = useNavigate();
   function handleSubmit({ email, password }) {
     // Передаём значения управляемых компонентов во внешний обработчик
-    api
-      .registerUser({ email, password })
+    auth
+      .requestUser({ email, password, endPoint: 'signup' })
       .then((res) => {
         setTitlePopup('Вы успешно зарегистрировались!');
         setIsStatusAuthPopupOpen(true);
@@ -35,7 +35,7 @@ function Register() {
   return (
     <>
       <Header title={'Войти'} route={'sign-in'} />
-      <NotLogin
+      <AuthPage
         title={'Регистрация'}
         buttonText={'Зарегистрироваться'}
         subTextButtonElement={

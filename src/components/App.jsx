@@ -2,43 +2,35 @@ import '../index.css';
 import React from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
-import AuthUserPage from './AuthUserPage';
+import UserPage from './UserPage';
 import Login from './Login';
 import Register from './Register';
 import { useEffect } from 'react';
-import api from '../utils/api';
+import auth from '../utils/auth';
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [emailUser, setEmailUser] = React.useState('');
   const navigate = useNavigate();
 
-  function auth(jwt) {
-    api
+  function chekToken(jwt) {
+    auth
       .chekTokenUser(jwt)
       .then((res) => {
-        console.log('email - ', res.data.email);
         setEmailUser(res.data.email);
         setLoggedIn(true);
-        console.log('loggedIn', loggedIn, 'emailUser', emailUser);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
 
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
-      auth(localStorage.jwt);
+      chekToken(localStorage.jwt);
     }
   }, []);
 
   useEffect(() => {
-    if (loggedIn) {
-      console.log(localStorage.getItem('jwt'), '    ');
-      auth(localStorage.jwt);
-      navigate('/', { replace: true });
-    }
+    navigate('/', { replace: true });
   }, [loggedIn]);
 
   return (
@@ -58,7 +50,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute
-              element={AuthUserPage}
+              element={UserPage}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               emailUser={emailUser}
@@ -72,7 +64,13 @@ function App() {
         />
         <Route
           path="/sign-in"
-          element={<Login setLoggedIn={setLoggedIn} loggedIn={loggedIn} />}
+          element={
+            <Login
+              setLoggedIn={setLoggedIn}
+              loggedIn={loggedIn}
+              setEmailUser={setEmailUser}
+            />
+          }
         />
       </Routes>
     </div>

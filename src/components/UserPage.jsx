@@ -10,7 +10,7 @@ import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
 
-function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
+function UserPage({ emailUser, setLoggedIn, loggedIn }) {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -22,6 +22,8 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
   const [selectedCard, setSelectedCard] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [cardDeleteId, setCardDeleteId] = React.useState('');
+  const [currentUser, setCurentUser] = React.useState({});
+  const [isLoading, setIsLoading] = React.useState(false);
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -29,7 +31,6 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
     setIsImagePopupOpen(false);
     setIsCardDeletePopupOpen(false);
   };
-  const [currentUser, setCurentUser] = React.useState({});
 
   //запрашиваем данные с сервера для ползователя и для отрисовки карточек
   React.useEffect(() => {
@@ -38,17 +39,13 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
       .then((data) => {
         setCurentUser(data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
     api
       .getCard()
       .then((data) => {
         setCards(data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }, []);
   //обработкик клика по лайку
   function handleCardLike(card) {
@@ -63,9 +60,7 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
           state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
   //обработка клика по кнопке удаления карточки
   function handleCardDelete(id) {
@@ -76,9 +71,7 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
         closeAllPopups();
         setCardDeleteId('');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
   //обработчик клика по картинке в карте
   function handleCardClick(card) {
@@ -90,23 +83,26 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
     api
       .setUserData(userDate)
       .then((data) => {
-        setCurentUser(data);
+        setCurentUser({
+          ...currentUser,
+          data,
+        });
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
   //обработка кнопки Сохранить в форме редоктирования аватара
   function handleUpdateAvatar(url) {
-    api
+    return api
       .setAvatar(url)
       .then((data) => {
+        setCurentUser({
+          ...currentUser,
+          avatar: url,
+        });
         closeAllPopups();
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
 
   //обработка кнопки Сохранить в форме добавления места
@@ -117,9 +113,7 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
         closeAllPopups();
         setCards([data, ...cards]);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
 
   return (
@@ -163,6 +157,8 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar}
+        setCurentUser={setCurentUser}
+        currentUser={currentUser}
       />
       <ConfirmationDelete
         isOpen={isCardDeletePopupOpen}
@@ -179,4 +175,4 @@ function AuthUserPage({ emailUser, setLoggedIn, loggedIn }) {
   );
 }
 
-export default AuthUserPage;
+export default UserPage;

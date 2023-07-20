@@ -52,7 +52,6 @@ function PopupWithForm({
           type="submit"
           title={`${buttonText} информацию`}
           className="popup__submit"
-          id="button-submit-popup-edit-user"
         >
           {buttonText}
         </button>

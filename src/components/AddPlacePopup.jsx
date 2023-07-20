@@ -41,36 +41,34 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <>
-        <div className="popup__form-section">
-          <input
-            type="text"
-            className="popup__field"
-            id="input-place-name"
-            name="inputPlaceName"
-            placeholder="Название нового места"
-            minLength="2"
-            maxLength="30"
-            onChange={handleChangeName}
-            value={name ?? ''}
-            required
-          />
-          <span className="popup__message-error"></span>
-        </div>
-        <div className="popup__form-section">
-          <input
-            type="url"
-            className="popup__field"
-            id="input-url-image-place"
-            name="inputURLImage"
-            placeholder="URL картинки"
-            onChange={handleChangeLink}
-            value={link ?? ''}
-            required
-          />
-          <span className="popup__message-error"></span>
-        </div>
-      </>
+      <div className="popup__form-section">
+        <input
+          type="text"
+          className="popup__field"
+          id="input-place-name"
+          name="inputPlaceName"
+          placeholder="Название нового места"
+          minLength="2"
+          maxLength="30"
+          onChange={handleChangeName}
+          value={name ?? ''}
+          required
+        />
+        <span className="popup__message-error"></span>
+      </div>
+      <div className="popup__form-section">
+        <input
+          type="url"
+          className="popup__field"
+          id="input-url-image-place"
+          name="inputURLImage"
+          placeholder="URL картинки"
+          onChange={handleChangeLink}
+          value={link ?? ''}
+          required
+        />
+        <span className="popup__message-error"></span>
+      </div>
     </PopupWithForm>
   );
 }

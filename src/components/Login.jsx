@@ -1,28 +1,25 @@
 import Header from './Header';
 import Footer from './Footer';
-import NotLogin from './NotLogin';
-import api from '../utils/api';
-import { Link } from 'react-router-dom';
-
+import AuthPage from './AuthPage';
+import auth from '../utils/auth';
 import React from 'react';
 
-function Login({ setLoggedIn, loggedIn }) {
+function Login({ setLoggedIn, loggedIn, setEmailUser }) {
   function handleSubmit({ email, password }) {
-    api
-      .loginUser({ email, password })
+    auth
+      .requestUser({ email, password, endPoint: 'signin' })
       .then((data) => {
         localStorage.setItem('jwt', data.token);
+        setEmailUser(email);
         setLoggedIn(true);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(console.error);
   }
 
   return (
     <>
       <Header title={'Регистрация'} loggedIn={loggedIn} route={'sign-up'} />
-      <NotLogin
+      <AuthPage
         title={'Вход'}
         buttonText={'Войти'}
         subTextButtonElement={''}

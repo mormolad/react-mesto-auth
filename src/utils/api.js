@@ -1,5 +1,9 @@
-class Api {
+import CreckResponse from './CheckResponse';
+
+class Api extends CreckResponse {
   constructor(configFetch) {
+    super();
+    this._creckResponse = super._creckResponse;
     this.url = configFetch.url;
     this.headers = configFetch.headers;
   }
@@ -9,10 +13,7 @@ class Api {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
   //получить карточки
@@ -21,10 +22,7 @@ class Api {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
   //установить новые данные о пользователе
@@ -34,10 +32,7 @@ class Api {
       headers: this.headers,
       body: JSON.stringify(userData),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
   //установить новую карточку
@@ -47,10 +42,7 @@ class Api {
       headers: this.headers,
       body: JSON.stringify({ name: name, link: link }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
   //удалить карточку
@@ -59,10 +51,7 @@ class Api {
       method: 'DELETE',
       headers: this.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
   // обработать клик по лайку (поставить/убрать)
@@ -72,10 +61,7 @@ class Api {
       method: changeFetch,
       headers: this.headers,
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
 
@@ -86,59 +72,7 @@ class Api {
       headers: this.headers,
       body: JSON.stringify({ avatar: urlAvatar }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
-  }
-  //зарегистрировать пользователя
-  registerUser({ email, password }) {
-    return fetch(`https://auth.nomoreparties.co/signup`, {
-      method: 'POST',
-
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ password, email }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
-  }
-  //зарегистрировать пользователя
-  loginUser({ email, password }) {
-    return fetch(`https://auth.nomoreparties.co/signin`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ password, email }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
-  }
-  //проверка токена
-  chekTokenUser(token) {
-    return fetch(`https://auth.nomoreparties.co/users/me`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      return this._creckResponse(res);
     });
   }
 }

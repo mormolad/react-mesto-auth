@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NotLogin({ title, buttonText, subTextButtonElement, name, onSubmit }) {
+function AuthPage({ title, buttonText, subTextButtonElement, name, onSubmit }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -72,4 +72,4 @@ function NotLogin({ title, buttonText, subTextButtonElement, name, onSubmit }) {
   );
 }
 
-export default NotLogin;
+export default AuthPage;

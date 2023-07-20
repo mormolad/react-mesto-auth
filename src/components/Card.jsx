@@ -23,9 +23,9 @@ function Card({ card, onCardClick, onClickLike, onClickDelete }) {
     card.likes.some((i) => i._id === currentUser._id) &&
     'card__like_state_active'
   }`;
-
+  // key={card._id}
   return (
-    <li className="card" key={card._id}>
+    <li className="card">
       <img
         src={card.link}
         alt={card.name}
