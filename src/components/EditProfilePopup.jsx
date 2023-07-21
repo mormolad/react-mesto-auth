@@ -1,12 +1,17 @@
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmitt,
+  } = useForm();
   //управление полями имя и род занятия
   React.useEffect(() => {
     setName(currentUser.name);
@@ -40,19 +45,28 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      errors={errors}
     >
       <div className="popup__form-section">
         <input
+          {...register('UserName', {
+            required: 'Обязательно к запалнению',
+            minLength: {
+              value: 2,
+              message: 'Минимум 5 символов',
+            },
+            maxLength: {
+              value: 2,
+              message: 'Максимум 40 символов',
+            },
+          })}
           type="text"
           className="popup__field"
           id="input-user-name"
           name="inputUserName"
-          minLength="2"
-          maxLength="40"
           placeholder="Имя автора"
           onChange={handleChangeName}
           value={name ?? ''} // что бы компонент сразу был управляемым
-          required
         />
         <span className="popup__message-error"></span>
       </div>
