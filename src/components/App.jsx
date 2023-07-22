@@ -33,7 +33,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    navigate('/', { replace: true });
+    loggedIn
+      ? navigate('/', { replace: true })
+      : navigate('/sign-in', { replace: true });
   }, [loggedIn]);
 
   return (
