@@ -20,7 +20,10 @@ function App() {
         setEmailUser(res.data.email);
         setLoggedIn(true);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log(err);
+        setLoggedIn(false);
+      });
   }
 
   useEffect(() => {
@@ -37,16 +40,6 @@ function App() {
     <div className="page">
       <Routes>
         <Route
-          path="/*"
-          element={
-            loggedIn ? (
-              <Navigate to="/" replace />
-            ) : (
-              <Navigate to="/sign-in" replace />
-            )
-          }
-        />
-        <Route
           path="/"
           element={
             <ProtectedRoute
@@ -54,7 +47,7 @@ function App() {
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               emailUser={emailUser}
-              navigate={navigate}
+              //navigate={navigate}
             />
           }
         />
@@ -70,6 +63,16 @@ function App() {
               loggedIn={loggedIn}
               setEmailUser={setEmailUser}
             />
+          }
+        />
+        <Route
+          path="/*"
+          element={
+            loggedIn ? (
+              <Navigate to="/" replace />
+            ) : (
+              <Navigate to="/sign-in" replace />
+            )
           }
         />
       </Routes>

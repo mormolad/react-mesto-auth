@@ -1,25 +1,15 @@
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import React from 'react';
+import useForm from '../hooks/useForm';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, setCurentUser }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
 
   //управление полями имя и род занятия
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    setValues({ ...values, name: currentUser.name, about: currentUser.about });
   }, [currentUser, isOpen]);
-  //обработка поля имени
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  // обработака поля рода деятельности
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
 
   //обработчик кнопки Сохранить в форме
   function handleSubmit(e) {
@@ -27,10 +17,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setCurentUser }) {
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name,
-      about: description,
+      name: values.name,
+      about: values.about,
     });
   }
+  const { values, handleChange, setValues } = useForm({});
 
   return (
     <PopupWithForm
@@ -47,10 +38,10 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setCurentUser }) {
           maxLength="200"
           className="popup__field"
           id="input-user-name"
-          name="inputUserName"
+          name="name"
           placeholder="Имя автора"
-          onChange={handleChangeName}
-          value={name ?? ''} // что бы компонент сразу был управляемым
+          onChange={handleChange}
+          value={values.name ?? ''} // что бы компонент сразу был управляемым
           required
         />
         <span className="popup__message-error"></span>
@@ -60,12 +51,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, setCurentUser }) {
           type="text"
           className="popup__field"
           id="input-user-employment"
-          name="inputUserEmployment"
+          name="about"
           minLength="2"
           maxLength="200"
           placeholder="Род деятельности"
-          onChange={handleChangeDescription}
-          value={description ?? ''} // что бы компонент сразу был управляемым
+          onChange={handleChange}
+          value={values.about ?? ''} // что бы компонент сразу был управляемым
           required
         />
         <span className="popup__message-error"></span>

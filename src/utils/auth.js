@@ -1,6 +1,6 @@
-import CreckResponse from './CheckResponse';
+import _checkResponse from './CheckResponse';
 
-class Auth extends CreckResponse {
+class Auth extends _checkResponse {
   constructor(configFetch) {
     super();
     this.url = configFetch.url;
@@ -17,7 +17,7 @@ class Auth extends CreckResponse {
       },
       body: JSON.stringify({ password, email }),
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -31,7 +31,7 @@ class Auth extends CreckResponse {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
 }

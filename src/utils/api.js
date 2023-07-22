@@ -1,9 +1,9 @@
-import CreckResponse from './CheckResponse';
+import _checkResponse from './CheckResponse';
 
-class Api extends CreckResponse {
+class Api extends _checkResponse {
   constructor(configFetch) {
     super();
-    this._creckResponse = super._creckResponse;
+    this._checkResponse = super._checkResponse;
     this.url = configFetch.url;
     this.headers = configFetch.headers;
   }
@@ -13,7 +13,7 @@ class Api extends CreckResponse {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
   //получить карточки
@@ -22,7 +22,7 @@ class Api extends CreckResponse {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
   //установить новые данные о пользователе
@@ -32,7 +32,7 @@ class Api extends CreckResponse {
       headers: this.headers,
       body: JSON.stringify(userData),
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
   //установить новую карточку
@@ -42,7 +42,7 @@ class Api extends CreckResponse {
       headers: this.headers,
       body: JSON.stringify({ name: name, link: link }),
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
   //удалить карточку
@@ -51,7 +51,7 @@ class Api extends CreckResponse {
       method: 'DELETE',
       headers: this.headers,
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
   // обработать клик по лайку (поставить/убрать)
@@ -61,7 +61,7 @@ class Api extends CreckResponse {
       method: changeFetch,
       headers: this.headers,
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
 
@@ -72,7 +72,7 @@ class Api extends CreckResponse {
       headers: this.headers,
       body: JSON.stringify({ avatar: urlAvatar }),
     }).then((res) => {
-      return this._creckResponse(res);
+      return this._checkResponse(res);
     });
   }
 }

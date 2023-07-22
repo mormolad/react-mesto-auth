@@ -112,6 +112,7 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
       .setNewCadr(dataCard)
       .then((data) => {
         closeAllPopups();
+        console.log(data);
         setCards([data, ...cards]);
       })
       .catch(console.error);

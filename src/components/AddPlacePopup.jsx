@@ -1,34 +1,24 @@
 import PopupWithForm from './PopupWithForm';
 import React from 'react';
+import useForm from '../hooks/useForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddCard }) {
   //name & link for api
-  const [name, setName] = React.useState('');
-  const [link, setLink] = React.useState('');
 
+  const { values, handleChange, setValues } = useForm({});
   //очищаем поля формы при открытии попап
   React.useEffect(() => {
     if (!isOpen) return;
-    setName('');
-    setLink('');
+    setValues({});
   }, [isOpen]);
-
-  // обработка названия рартинки
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  // обработака поля ссылки на картинку
-  function handleChangeLink(e) {
-    setLink(e.target.value);
-  }
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
     onAddCard({
-      name,
-      link,
+      name: values.name,
+      link: values.link,
     });
   }
 
@@ -46,12 +36,12 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
           type="text"
           className="popup__field"
           id="input-place-name"
-          name="inputPlaceName"
+          name="name"
           placeholder="Название нового места"
           minLength="2"
           maxLength="30"
-          onChange={handleChangeName}
-          value={name ?? ''}
+          onChange={handleChange}
+          value={values.name ?? ''}
           required
         />
         <span className="popup__message-error"></span>
@@ -61,10 +51,10 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
           type="url"
           className="popup__field"
           id="input-url-image-place"
-          name="inputURLImage"
+          name="link"
           placeholder="URL картинки"
-          onChange={handleChangeLink}
-          value={link ?? ''}
+          onChange={handleChange}
+          value={values.link ?? ''}
           required
         />
         <span className="popup__message-error"></span>

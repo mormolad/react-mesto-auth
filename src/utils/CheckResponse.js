@@ -1,6 +1,6 @@
-export default class CreckResponse {
+export default class _checkResponse {
   constructor() {}
-  _creckResponse(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }

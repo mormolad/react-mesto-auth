@@ -1,5 +1,4 @@
 import React from 'react';
-
 function PopupWithForm({
   title,
   name,
@@ -8,7 +7,6 @@ function PopupWithForm({
   onClose,
   onSubmit,
   children,
-  formState,
 }) {
   //установка слушателя для закрытия попапа по кнопке esc и последущее его удаление при закрытии
   React.useEffect(() => {
