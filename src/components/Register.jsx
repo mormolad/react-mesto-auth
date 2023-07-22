@@ -17,14 +17,15 @@ function Register() {
       .requestUser({ email, password, endPoint: 'signup' })
       .then((res) => {
         setTitlePopup('Вы успешно зарегистрировались!');
-        setIsStatusAuthPopupOpen(true);
         setRegisterStatus(true);
       })
       .catch((err) => {
         setTitlePopup('Что-то пошло не так! Попробуйте ещё раз.');
-        setIsStatusAuthPopupOpen(true);
         setRegisterStatus(false);
         console.log(err);
+      })
+      .finally(() => {
+        setIsStatusAuthPopupOpen(true);
       });
   }
   const closePopup = () => {

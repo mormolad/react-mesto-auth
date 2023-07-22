@@ -1,5 +1,4 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
 
 function PopupWithForm({
   title,
@@ -9,7 +8,7 @@ function PopupWithForm({
   onClose,
   onSubmit,
   children,
-  errors,
+  formState,
 }) {
   //установка слушателя для закрытия попапа по кнопке esc и последущее его удаление при закрытии
   React.useEffect(() => {
@@ -29,9 +28,6 @@ function PopupWithForm({
       onClose();
     }
   }
-  const handleChange = () => {
-    console.log(errors);
-  };
 
   return (
     <div
@@ -47,8 +43,6 @@ function PopupWithForm({
         name={`form-popup-${name}`}
         id={`content-popup-${name}`}
         onSubmit={onSubmit}
-        onChange={handleChange}
-        noValidate
       >
         <h3 className="popup__title" id={`title-popup-${name}`}>
           {title}
@@ -65,7 +59,6 @@ function PopupWithForm({
           type="button"
           title="закрыть модальное окно"
           className="popup__close-popup"
-          id="button-close-popup-edit-user"
           onClick={onClose}
         ></button>
       </form>

@@ -23,7 +23,6 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
   const [cards, setCards] = React.useState([]);
   const [cardDeleteId, setCardDeleteId] = React.useState('');
   const [currentUser, setCurentUser] = React.useState({});
-  const [isLoading, setIsLoading] = React.useState(false);
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -83,13 +82,15 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
     api
       .setUserData(userDate)
       .then((data) => {
+        closeAllPopups();
         setCurentUser({
           ...currentUser,
-          data,
+          name: data.name,
+          about: data.about,
         });
-        closeAllPopups();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally((res) => {});
   }
   //обработка кнопки Сохранить в форме редоктирования аватара
   function handleUpdateAvatar(url) {
@@ -147,6 +148,7 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
         onUpdateUser={handleUpdateUser}
+        setCurentUser={setCurentUser}
       />
       <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
