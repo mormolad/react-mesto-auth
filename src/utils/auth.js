@@ -1,6 +1,6 @@
-import _checkResponse from './CheckResponse';
+import СheckResponse from './CheckResponse';
 
-class Auth extends _checkResponse {
+class Auth extends СheckResponse {
   constructor(configFetch) {
     super();
     this.url = configFetch.url;
