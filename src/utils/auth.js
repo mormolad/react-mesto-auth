@@ -7,7 +7,7 @@ class Auth extends _checkResponse {
     this.headers = configFetch.headers;
     this._creckResponse = super._creckResponse;
   }
-  //зарегистрировать пользователя
+  //зарегистрировать пользователя и войти в акк
   requestUser({ email, password, endPoint }) {
     return fetch(`${this.url}${endPoint}`, {
       method: 'POST',
@@ -37,7 +37,7 @@ class Auth extends _checkResponse {
 }
 
 const auth = new Auth({
-  url: 'https://auth.nomoreparties.co/',
+  url: 'http://api.mormolad.nomoredomainsrocks.ru/',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

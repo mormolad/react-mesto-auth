@@ -49,7 +49,6 @@ function App() {
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               emailUser={emailUser}
-              //navigate={navigate}
             />
           }
         />

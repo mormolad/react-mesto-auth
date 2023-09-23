@@ -22,6 +22,7 @@ class Api extends _checkResponse {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
+      console.log(res);
       return this._checkResponse(res);
     });
   }
@@ -77,10 +78,10 @@ class Api extends _checkResponse {
   }
 }
 const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-66/',
+  url: 'http://api.mormolad.nomoredomainsrocks.ru/',
   headers: {
     'Content-Type': 'application/json',
-    authorization: '4d34c841-0266-4e27-9ed8-f76bb6fb7087',
+    Authorization: localStorage.jwt,
   },
 });
 
