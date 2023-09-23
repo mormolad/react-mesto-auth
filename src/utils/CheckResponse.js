@@ -1,4 +1,4 @@
-export default class _checkResponse {
+export default class СheckResponse {
   constructor() {}
   _checkResponse(res) {
     if (res.ok) {

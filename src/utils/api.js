@@ -1,6 +1,6 @@
-import _checkResponse from './CheckResponse';
+import СheckResponse from './CheckResponse';
 
-class Api extends _checkResponse {
+class Api extends СheckResponse {
   constructor(configFetch) {
     super();
     this._checkResponse = super._checkResponse;
