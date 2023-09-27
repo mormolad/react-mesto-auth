@@ -17,11 +17,11 @@ function App() {
     auth
       .chekTokenUser(jwt)
       .then((res) => {
-        setEmailUser(res.data.email);
+        setEmailUser(res.message.email);
         setLoggedIn(true);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('ошибка проверки токена', err);
         setLoggedIn(false);
       });
   }
@@ -33,12 +33,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('logginIN в App', loggedIn);
     if (loggedIn) {
-      console.log(loggedIn, 'if true');
       navigate('/', { replace: true });
     } else {
-      console.log(loggedIn, 'if false');
       navigate('/sign-in', { replace: true });
     }
   }, [loggedIn]);

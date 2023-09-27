@@ -36,27 +36,32 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
     api
       .getInfoUser()
       .then((data) => {
-        setCurentUser(data);
+        setCurentUser(data.message);
       })
       .catch(console.error);
     api
       .getCard()
       .then((data) => {
-        setCards(data);
+        setCards(data.message);
       })
       .catch(console.error);
   }, []);
   //обработкик клика по лайку
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const checkLikeOwnerPage = (element, index, arry) => {
+      return element === currentUser._id;
+    };
+
+    const isLiked = card.likes.some(checkLikeOwnerPage);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
+        console.log(card._id, isLiked, newCard);
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.message : c))
         );
       })
       .catch(console.error);
