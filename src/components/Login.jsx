@@ -9,7 +9,7 @@ function Login({ setLoggedIn, loggedIn, setEmailUser }) {
     auth
       .requestUser({ email, password, endPoint: 'signin' })
       .then((data) => {
-        localStorage.setItem('jwt', `Bearer ${data.message}`);
+        localStorage.setItem('jwt', data.message);
         setEmailUser(email);
         setLoggedIn(true);
       })

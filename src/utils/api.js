@@ -22,7 +22,6 @@ class Api extends СheckResponse {
       method: 'GET',
       headers: this.headers,
     }).then((res) => {
-      console.log(res);
       return this._checkResponse(res);
     });
   }
@@ -81,7 +80,7 @@ const api = new Api({
   url: 'http://api.mormolad.nomoredomainsrocks.ru/',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: localStorage.jwt,
+    Authorization: `Bearer ${localStorage.jwt}`,
   },
 });
 
