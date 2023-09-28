@@ -59,7 +59,6 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
-        console.log(card._id, isLiked, newCard);
         setCards((state) =>
           state.map((c) => (c._id === card._id ? newCard.message : c))
         );
@@ -87,11 +86,12 @@ function UserPage({ emailUser, setLoggedIn, loggedIn }) {
     api
       .setUserData(userDate)
       .then((data) => {
+        console.log(data);
         closeAllPopups();
         setCurentUser({
           ...currentUser,
-          name: data.name,
-          about: data.about,
+          name: data.message.name,
+          about: data.message.about,
         });
       })
       .catch(console.error)

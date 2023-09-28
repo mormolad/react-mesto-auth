@@ -38,7 +38,7 @@ function App() {
     } else {
       navigate('/sign-in', { replace: true });
     }
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   return (
     <div className="page">

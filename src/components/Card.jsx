@@ -17,7 +17,7 @@ function Card({ card, onCardClick, onClickLike, onClickDelete }) {
 
   // подписываемся на контекст
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(card.likes);
+
   const checkLikeOwnerPage = (element, index, arry) => {
     return element === currentUser._id;
   };
@@ -45,7 +45,7 @@ function Card({ card, onCardClick, onClickLike, onClickDelete }) {
         ></button>
         <p className="card__numberOfLike">{card.likes.length}</p>
       </div>
-      {card.owner._id === currentUser._id && (
+      {card.owner === currentUser._id && (
         <button
           type="button"
           className="card__del-card"
